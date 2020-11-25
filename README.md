@@ -1,2 +1,2 @@
-# my-marquee-api
-Create an share a movies to watch list
+# my-marquee
+Keep a list of movies to watch and share with others 
