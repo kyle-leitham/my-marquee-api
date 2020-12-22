@@ -12,39 +12,39 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/api/v1/movie-lists")
 public class MovieListController {
 	
-	@GetMapping("/")
+	@GetMapping
 	@ResponseBody
 	public String getLists() {
 		return "Lists";
 	}
 
-	@PostMapping("/")
+	@PostMapping
 	@ResponseBody
 	public String createList() {
 		return "List created";
 	}
   
-	@DeleteMapping("/{listId}")
+	@DeleteMapping("/{listID}")
 	@ResponseBody
-	public String deleteList(@PathVariable("listId") String id) {
+	public String deleteList(@PathVariable("listID") String id) {
 		return "List " + id + " deleted";
 	}
   
-	@GetMapping("/{listId}")
+	@GetMapping("/{listID}")
 	@ResponseBody
-	public String getList(@PathVariable("listId") String id) {
+	public String getList(@PathVariable("listID") String id) {
 		return "List " + id;
 	}
   
-	@PostMapping("/{listId}/movies/{movieId}")
+	@PostMapping("/{listID}/movies/{movieID}")
 	@ResponseBody
-	public String addMovie(@PathVariable("listId") String listId, @PathVariable("movieId") String movieId) {
+	public String addMovie(@PathVariable("listID") String listId, @PathVariable("movieID") String movieId) {
 		return "Movie " + movieId + " added to List " + listId;
 	}
   
-	@DeleteMapping("/{listId}/movies/{movieId}")
+	@DeleteMapping("/{listID}/movies/{movieID}")
 	@ResponseBody
-	public String removeMovie(@PathVariable("listId") String listId, @PathVariable("movieId") String movieId) {
+	public String removeMovie(@PathVariable("listID") String listId, @PathVariable("movieID") String movieId) {
 		return "Movie " + movieId + " removed from List " + listId;
 	}
 }
