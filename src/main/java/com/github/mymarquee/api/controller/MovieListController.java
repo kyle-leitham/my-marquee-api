@@ -38,13 +38,13 @@ public class MovieListController {
   
 	@PostMapping("/{listId}/movies/{movieId}")
 	@ResponseBody
-	public String addMovie(@PathVariable("listId") String listId, @PathVariable("movieId") String movieId) {
+	public String addMovieToList(@PathVariable("listId") String listId, @PathVariable("movieId") String movieId) {
 		return "Movie " + movieId + " added to List " + listId;
 	}
   
 	@DeleteMapping("/{listId}/movies/{movieId}")
 	@ResponseBody
-	public String removeMovie(@PathVariable("listId") String listId, @PathVariable("movieId") String movieId) {
+	public String removeMovieFromList(@PathVariable("listId") String listId, @PathVariable("movieId") String movieId) {
 		return "Movie " + movieId + " removed from List " + listId;
 	}
 }
