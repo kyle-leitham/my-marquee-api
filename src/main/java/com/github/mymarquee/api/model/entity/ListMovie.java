@@ -24,10 +24,10 @@ public class ListMovie {
 	
 	protected ListMovie() {}
 	
-	public ListMovie(List relatedList, String imdbMovieId, String tmdbMovieId) {
+	public ListMovie(List relatedList, String tmdbMovieId, String imdbMovieId) {
 		this.relatedList = relatedList;
-		this.imdbMovieId = imdbMovieId;
 		this.tmdbMovieId = tmdbMovieId;
+		this.imdbMovieId = imdbMovieId;
 	}
 	
 	public Long getId() {
