@@ -1,8 +1,10 @@
 package com.github.mymarquee.api.model.json;
 
+import org.springframework.hateoas.RepresentationModel;
+
 import com.github.mymarquee.api.model.entity.List;
 
-public class ListJson {
+public class ListJson extends RepresentationModel<ListJson> {
 	private Long id;
 	private String name;
 	

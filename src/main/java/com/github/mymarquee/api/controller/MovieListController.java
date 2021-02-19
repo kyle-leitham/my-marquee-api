@@ -1,5 +1,8 @@
 package com.github.mymarquee.api.controller;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -11,7 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -31,7 +33,9 @@ public class MovieListController {
 	public java.util.List<ListJson> getLists() {
 		java.util.List<ListJson> listsJson = new ArrayList<ListJson>();
 		for (List list : this.listRepo.findAll()) {
-			listsJson.add(new ListJson(list));
+			ListJson listJson = new ListJson(list);
+			listJson.add(linkTo(methodOn(MovieListController.class).getList(list.getId())).withSelfRel());
+			listsJson.add(listJson);
 	    }
 		return listsJson;
 	}
@@ -39,7 +43,7 @@ public class MovieListController {
 	@PostMapping
 	public String createList(@RequestBody ListJson listJson) {
 		List list = this.listRepo.save(new List(listJson.getName()));
-		return "List " + list.getName() + " created";
+		return "List " + list.getName() + " created"; //Return link to created resource
 	}
   
 	@DeleteMapping("/{listID}")
@@ -53,14 +57,19 @@ public class MovieListController {
   
 	@GetMapping("/{listID}")
 	public ListJson getList(@PathVariable("listID") Long id) {
-		return new ListJson(getListByIdOrRespondNotFound(id));
+		ListJson listJson = new ListJson(getListByIdOrRespondNotFound(id));
+		listJson.add(linkTo(methodOn(MovieListController.class).getList(id)).withSelfRel());
+		listJson.add(linkTo(methodOn(MovieListController.class).getMoviesOnList(id)).withRel("movies"));
+		return listJson;
 	}
 	
 	@GetMapping("/{listID}/movies")
 	public java.util.List<MovieJson> getMoviesOnList(@PathVariable("listID") Long listId) {
 		java.util.List<MovieJson> moviesJson = new ArrayList<MovieJson>();
 		for (ListMovie listMovie : getListByIdOrRespondNotFound(listId).getMovies()) {
-			moviesJson.add(new MovieJson(listMovie));
+			MovieJson movieJson = new MovieJson(listMovie);
+			//Link to self
+			moviesJson.add(movieJson);
 		}
 		return moviesJson;
 	}
@@ -71,7 +80,7 @@ public class MovieListController {
 		ListMovie listMovie = new ListMovie(list, movieJson.getTmdbMovieId(), movieJson.getImdbMovieId());
 		list.getMovies().add(listMovie);
 		this.listRepo.save(list);
-		return "Movie added to List " + listId;
+		return "Movie added to List " + listId; //Return link to created resource
 	}
   
 	@DeleteMapping("/{listID}/movies/{movieID}")

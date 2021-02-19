@@ -1,8 +1,10 @@
 package com.github.mymarquee.api.model.json;
 
+import org.springframework.hateoas.RepresentationModel;
+
 import com.github.mymarquee.api.model.entity.ListMovie;
 
-public class MovieJson {
+public class MovieJson extends RepresentationModel<ListJson> {
 	private Long id;
 	private String tmdbMovieId;
 	private String imdbMovieId;
