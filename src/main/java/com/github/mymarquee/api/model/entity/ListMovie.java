@@ -17,14 +17,14 @@ public class ListMovie {
 	
 	@ManyToOne
 	@JoinColumn(name="related_list_id", nullable=false)
-	private List relatedList;
+	private MyMarqueeList relatedList;
 	
 	private String imdbMovieId;
 	private String tmdbMovieId;
 	
 	protected ListMovie() {}
 	
-	public ListMovie(List relatedList, String tmdbMovieId, String imdbMovieId) {
+	public ListMovie(MyMarqueeList relatedList, String tmdbMovieId, String imdbMovieId) {
 		this.relatedList = relatedList;
 		this.tmdbMovieId = tmdbMovieId;
 		this.imdbMovieId = imdbMovieId;
@@ -34,7 +34,7 @@ public class ListMovie {
 		return this.id;
 	}
 	  
-	public List getRelatedList() {
+	public MyMarqueeList getRelatedList() {
 		return this.relatedList;
 	}
 	

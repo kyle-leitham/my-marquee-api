@@ -2,7 +2,7 @@ package com.github.mymarquee.api.model.json;
 
 import org.springframework.hateoas.RepresentationModel;
 
-import com.github.mymarquee.api.model.entity.List;
+import com.github.mymarquee.api.model.entity.MyMarqueeList;
 
 public class ListJson extends RepresentationModel<ListJson> {
 	private Long id;
@@ -10,7 +10,7 @@ public class ListJson extends RepresentationModel<ListJson> {
 	
 	protected ListJson() {}
 	
-	public ListJson(List list) {
+	public ListJson(MyMarqueeList list) {
 		this.id = list.getId();
 		this.name = list.getName();
 	}

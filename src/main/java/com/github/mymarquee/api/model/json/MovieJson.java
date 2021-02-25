@@ -3,18 +3,17 @@ package com.github.mymarquee.api.model.json;
 import org.springframework.hateoas.RepresentationModel;
 
 import com.github.mymarquee.api.model.entity.ListMovie;
+import com.github.tmdb.api.response.json.TmdbMovieJson;
 
-public class MovieJson extends RepresentationModel<ListJson> {
+public class MovieJson extends RepresentationModel<MovieJson> {
 	private Long id;
-	private String tmdbMovieId;
-	private String imdbMovieId;
+	private TmdbMovieJson movieData;
 	
 	protected MovieJson() {}
 	
-	public MovieJson(ListMovie listMovie) {
+	public MovieJson(ListMovie listMovie, TmdbMovieJson movieData) {
 		this.id = listMovie.getId();
-		this.tmdbMovieId = listMovie.getTmdbMovieId();
-		this.imdbMovieId = listMovie.getImdbMovieId();
+		this.movieData = movieData;
 	}
 	
 	public Long getId() {
@@ -25,19 +24,11 @@ public class MovieJson extends RepresentationModel<ListJson> {
 		this.id = id;
 	}
 	
-	public String getTmdbMovieId() {
-		return this.tmdbMovieId;
+	public TmdbMovieJson getMovieData() {
+		return this.movieData;
 	}
 	
-	public void setTmdbMovieId(String tmdbMovieId) {
-		this.tmdbMovieId = tmdbMovieId;
-	}
-	
-	public String getImdbMovieId() {
-		return this.imdbMovieId;
-	}
-	
-	public void setImdbMovieId(String imdbMovieId) {
-		this.imdbMovieId = imdbMovieId;
+	public void setMovieDate(TmdbMovieJson movieData) {
+		this.movieData = movieData;
 	}
 }

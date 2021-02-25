@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="lists")
-public class List {
+public class MyMarqueeList {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
@@ -21,9 +21,9 @@ public class List {
     @OneToMany(mappedBy="relatedList", orphanRemoval=true, cascade=CascadeType.ALL)
     private Set<ListMovie> movies;
 	
-	protected List() {}
+	protected MyMarqueeList() {}
 	
-	public List(String name) {
+	public MyMarqueeList(String name) {
 		this.name = name;
 	}
 	  
